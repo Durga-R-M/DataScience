@@ -1,2 +1,64 @@
-class customer:
- def __init__(self):
+class bus:
+    def __init__(self,seat):
+        self.seatlist = seat
+    def show(self):
+        print(self.seatlist)
+    def book_seat(self,requested_seat):
+        if requested_seat in self.seatlist:
+            self.seatlist.remove(requested_seat)
+            print("Thank you , Issued seat is",requested_seat)
+            return True
+        else:
+            print("Sorry , seat is not available")
+            return False
+    def cancel_seat(self,cancelled_seat):
+        if cancelled_seat in self.total_seat_list:
+            self.total_seat_list.add(cancelled_seat)
+            print("Thank you , the ticket cancelled is",cancelled_seat)
+            return True
+        else:
+            print("Sorry , canceling seat is not possible")
+            return False
+class passenger:
+    def __init__(self):
+        self.bookedseatlist = []
+    def request_seat(self):
+        self.seat = input("enter the seat name : ")
+        return self.seat
+    def addseat(self,requested_seat):
+        self.bookedseatlist.append(requested_seat)
+    def cancelseat(self,cancelled_seat):
+        self.bookedseatlist.remove(cancelled_seat)
+
+    def show(self):
+        print(self.bookedseatlist)
+total_seat_list = bus(["seat1","seat2","seat3","seat4","seat5","seat6","seat7","seat8","seat9","seat10"])
+sathya = passenger() 
+
+while True:
+    #b
+    print("-------------------------------------------")
+    print("enter your choice")
+    print("1. show available seat list \n2. book a seat \n3. cancel a seat \n4. passenger booked seat list \n5. exit")
+    option=int(input())
+    if option==1:
+        total_seat_list.show()
+    elif option==2:
+        requested_seat = sathya.request_seat()
+        status =total_seat_list.book_seat(requested_seat)
+        if status == True:
+            sathya.addseat(requested_seat)
+    elif option==3:
+      print("Your ticket is cancelled")
+        #requested_seat = sathya.request_seat()
+        #status =total_seat_list.cancel_seat(requested_seat)
+        #if status == True:
+         #   sathya.cancelseat(requested_seat)
+
+    elif option==4:
+        sathya.show()
+
+
+    elif option==5:
+        print("Bye Have a safe journey")
+        break
